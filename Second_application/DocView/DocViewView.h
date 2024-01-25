@@ -45,6 +45,7 @@ public:
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnAdd();
 	afx_msg void OnDelete();
+	afx_msg void OnUpdateDelete(CCmdUI *pCmdUI);
 };
 
 #ifndef _DEBUG  // версия отладки в DocViewView.cpp

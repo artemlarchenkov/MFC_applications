@@ -30,6 +30,7 @@ BEGIN_MESSAGE_MAP(CDocViewView, CListView)
 	ON_WM_CREATE()
 	ON_COMMAND(ID_MODIFY_ADD, OnAdd)
 	ON_COMMAND(ID_MODIFY_DELETE, OnDelete)
+	ON_UPDATE_COMMAND_UI(ID_MODIFY_DELETE, OnUpdateDelete)
 END_MESSAGE_MAP()
 
 // Создание или уничтожение CDocViewView
@@ -136,4 +137,8 @@ void CDocViewView::OnAdd()
 void CDocViewView::OnDelete()
 {
 	AfxMessageBox(L"OnDelete()");
+}
+
+void CDocViewView::OnUpdateDelete(CCmdUI* pCmdUI)
+{
 }
