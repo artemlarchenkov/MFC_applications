@@ -14,6 +14,23 @@ public:
 
 	}
 
+	void Serialize(CArchive& ar)
+	{
+		if (ar.IsStoring())
+		{
+			ar << _number;
+			ar << _name;
+			ar << _avgMark;
+		}
+		else
+		{
+			ar >> _number;
+			ar >> _name;
+			ar >> _avgMark;
+		}
+	}
+
+
 	Student& operator=(Student& rhv)
 	{
 		_name = rhv._name;

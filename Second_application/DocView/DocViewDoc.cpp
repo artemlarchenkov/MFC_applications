@@ -58,11 +58,29 @@ void CDocViewDoc::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
-		// TODO: добавьте код сохранения
+		int nCount = m_list.GetCount();
+
+		ar << nCount;
+
+		Student* st = m_list.GetFirst();
+		while (st != NULL)
+		{
+			st->Serialize(ar);
+			st = m_list.GetNext();
+		}
 	}
 	else
 	{
-		// TODO: добавьте код загрузки
+		int nCount = 0;
+		ar >> nCount;
+
+		for (int i = 0; i < nCount; ++i)
+		{
+			Student st;
+			st.Serialize(ar);
+
+			m_list.PushBack(&st);
+		}
 	}
 }
 
@@ -136,3 +154,11 @@ void CDocViewDoc::Dump(CDumpContext& dc) const
 
 
 // Команды CDocViewDoc
+
+
+void CDocViewDoc::DeleteContents()
+{
+	m_list.Clear();
+
+	CDocument::DeleteContents();
+}

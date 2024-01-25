@@ -48,6 +48,7 @@ public:
 	afx_msg void OnAdd();
 	afx_msg void OnDelete();
 	afx_msg void OnUpdateDelete(CCmdUI *pCmdUI);
+	virtual void OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/);
 };
 
 #ifndef _DEBUG  // версия отладки в DocViewView.cpp

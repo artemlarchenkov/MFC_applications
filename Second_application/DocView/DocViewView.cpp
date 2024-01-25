@@ -168,13 +168,47 @@ void CDocViewView::OnAdd()
 
 		GetDocument()->m_list.PushBack(&st);
 
+		GetDocument()->SetModifiedFlag(TRUE);
+
+		GetDocument()->UpdateAllViews(NULL,
+			UPDATE_ADD_STUDENT, NULL);
+
 		FillList();
+
+
 	}
 }
 
 void CDocViewView::OnDelete()
 {
-	AfxMessageBox(L"OnDelete()");
+	if (IDYES != MessageBox(L"Удалить студента?", L"Подтверждение",
+		MB_YESNO | MB_ICONQUESTION))
+	{
+		return;
+	}
+
+	CListCtrl& rList = GetListCtrl();
+
+	POSITION pos = rList.GetFirstSelectedItemPosition();
+
+	while (pos)
+	{
+		int nItem = rList.GetNextSelectedItem(pos);
+
+		Student* st = GetDocument()->m_list.GetFirst();
+
+		while (st != NULL)
+		{
+			if (st == (Student*) rList.GetItemData(nItem))
+			{
+				GetDocument()->m_list.RemoveCurrent();
+				break;
+			}
+			st = GetDocument()->m_list.GetNext();
+		}
+	}
+	GetDocument()->SetModifiedFlag(TRUE);
+	GetDocument()->UpdateAllViews(NULL,UPDATE_DEL_STUDENT, NULL );
 }
 
 void CDocViewView::OnUpdateDelete(CCmdUI* pCmdUI)
@@ -183,6 +217,11 @@ void CDocViewView::OnUpdateDelete(CCmdUI* pCmdUI)
 	if (GetListCtrl().GetSelectedCount() > 0)
 		bEnable = TRUE;
 
-	pCmdUI->Enable(bEnable);
-		
+	pCmdUI->Enable(bEnable);	
+}
+
+
+void CDocViewView::OnUpdate(CView* /*pSender*/, LPARAM /*lHint*/, CObject* /*pHint*/)
+{
+	FillList();
 }

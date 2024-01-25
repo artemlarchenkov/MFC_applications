@@ -7,6 +7,10 @@
  
 #include "list.h"
 
+#define UPDATE_ADD_STUDENT 1
+#define UPDATE_DEL_STUDENT 2
+#define UPDATE_EDIT_STUDENT 3
+
 class CDocViewDoc : public CDocument
 {
 protected: // создать только из сериализации
@@ -47,4 +51,6 @@ protected:
 	// Вспомогательная функция, задающая содержимое поиска для обработчика поиска
 	void SetSearchContent(const CString& value);
 #endif // SHARED_HANDLERS
+public:
+	virtual void DeleteContents();
 };

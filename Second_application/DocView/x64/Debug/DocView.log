@@ -1,2 +1,2 @@
 ﻿  DocViewView.cpp
-  DocView.vcxproj -> A:\Пользователи\Артем\Documents\MFC_first_application\Second_application\x64\Debug\DocView.exe
+LINK : fatal error LNK1168: не удается открыть A:\Пользователи\Артем\Documents\MFC_first_application\Second_application\x64\Debug\DocView.exe для записи
