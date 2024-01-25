@@ -67,6 +67,10 @@ void CDocViewView::OnInitialUpdate()
 {
 	CListView::OnInitialUpdate();
 
+	GetListCtrl().DeleteAllItems();
+
+	GetListCtrl().InsertItem(0, L"Test Item", -1);
+
 
 	// TODO: ListView можно заполнить элементами посредством непосредственного обращения
 	//  к элементам управления этого списка через вызов GetListCtr().
@@ -141,4 +145,10 @@ void CDocViewView::OnDelete()
 
 void CDocViewView::OnUpdateDelete(CCmdUI* pCmdUI)
 {
+	BOOL bEnable = FALSE;
+	if (GetListCtrl().GetSelectedCount() > 0)
+		bEnable = TRUE;
+
+	pCmdUI->Enable(bEnable);
+		
 }
