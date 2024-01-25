@@ -13,6 +13,8 @@
 #include "DocViewDoc.h"
 #include "DocViewView.h"
 
+#include "CStudentEditDlg.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -69,8 +71,7 @@ void CDocViewView::OnInitialUpdate()
 
 	GetListCtrl().DeleteAllItems();
 
-	GetListCtrl().InsertItem(0, L"Test Item", -1);
-
+	FillList();
 
 	// TODO: ListView можно заполнить элементами посредством непосредственного обращения
 	//  к элементам управления этого списка через вызов GetListCtr().
@@ -109,6 +110,27 @@ void CDocViewView::Dump(CDumpContext& dc) const
 	CListView::Dump(dc);
 }
 
+void CDocViewView::FillList()
+{
+	CListCtrl& rList = GetListCtrl();
+
+	rList.DeleteAllItems();
+
+	Student* st = GetDocument()->m_list.GetFirst();
+
+	for(; st != NULL; st = GetDocument()->m_list.GetNext())
+	{
+		int nPos = rList.InsertItem(rList.GetItemCount(), 
+			st->GetName(), 0);
+		
+		CString sMark;
+		sMark.Format(L"%g", st->GetMark());
+		rList.SetItemText(nPos, 1, sMark);
+		rList.SetItemData(nPos, (DWORD_PTR) st);
+	}
+
+}
+
 CDocViewDoc* CDocViewView::GetDocument() const // встроена неотлаженная версия
 {
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CDocViewDoc)));
@@ -135,7 +157,19 @@ int CDocViewView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 void CDocViewView::OnAdd()
 {
-	AfxMessageBox(L"OnAdd()");
+	CStudentEditDlg dlg;
+
+	if (IDOK == dlg.DoModal())
+	{
+		Student st;
+
+		st.SetName(dlg.m_strName);
+		st.SetMark(dlg.m_fMark);
+
+		GetDocument()->m_list.PushBack(&st);
+
+		FillList();
+	}
 }
 
 void CDocViewView::OnDelete()

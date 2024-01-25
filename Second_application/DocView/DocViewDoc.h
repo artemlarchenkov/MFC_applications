@@ -4,7 +4,8 @@
 
 
 #pragma once
-
+ 
+#include "list.h"
 
 class CDocViewDoc : public CDocument
 {
@@ -13,7 +14,8 @@ protected: // создать только из сериализации
 	DECLARE_DYNCREATE(CDocViewDoc)
 
 // Атрибуты
-public:
+public: 
+	List m_list;
 
 // Операции
 public:

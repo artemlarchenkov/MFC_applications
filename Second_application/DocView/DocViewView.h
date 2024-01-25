@@ -38,6 +38,8 @@ public:
 
 protected:
 
+	void FillList();
+
 // Созданные функции схемы сообщений
 protected:
 	DECLARE_MESSAGE_MAP()

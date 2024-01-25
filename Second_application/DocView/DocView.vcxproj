@@ -183,16 +183,19 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CStudentEditDlg.h" />
     <ClInclude Include="DocView.h" />
     <ClInclude Include="DocViewDoc.h" />
     <ClInclude Include="DocViewView.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="list.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CStudentEditDlg.cpp" />
     <ClCompile Include="DocView.cpp" />
     <ClCompile Include="DocViewDoc.cpp" />
     <ClCompile Include="DocViewView.cpp" />
